@@ -1,0 +1,39 @@
+version: '4'
+
+services:
+  mysql:
+    image: mysql:8.3.0
+    container_name: safecreditai-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: safecreditai
+      MYSQL_USER: safeuser
+      MYSQL_PASSWORD: safepass123
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  phpmyadmin:
+    image: phpmyadmin:5.2
+    container_name: safecreditai-phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: safeuser
+      PMA_PASSWORD: safepass123
+      UPLOAD_LIMIT: 100M
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    restart: always
+
+volumes:
+  mysql-data:

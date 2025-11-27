@@ -1,0 +1,209 @@
+                    ┌──────────────────────────┐
+                    │        Data Source       │
+                    │ Customer Demographics,   │
+                    │ Card Usage, Transactions │
+                    └────────────┬─────────────┘
+                                 │
+                ┌────────────────▼────────────────┐
+                │       Data Preprocessing        │
+                │ Cleaning • Encoding • Scaling   │
+                └────────────────┬────────────────┘
+                                 │
+                 ┌───────────────┴───────────────┐
+                 │                               │
+      ┌──────────▼───────────┐        ┌──────────▼───────────┐
+      │ Multiple Linear      │        │ Logistic Regression  │
+      │ Regression (Insights)│        │ (Prediction Model)   │
+      └──────────┬───────────┘        └──────────┬───────────┘
+                 │                               │
+     ┌───────────▼──────────┐         ┌──────────▼──────────┐
+     │ Feature Importance   │         │ Model Training &    │
+     │ Correlations, Trends │         │ Evaluation Accuracy │
+     └───────────┬──────────┘         └──────────┬──────────┘
+                 │                               │
+                 └──────────────┬────────────────┘
+                                │
+                    ┌───────────▼────────────┐
+                    │ Combined Insights      │
+                    │ - MLR + LR Comparison  │
+                    │ - Business Actions     │
+                    └───────────┬────────────┘
+                                │
+                    ┌───────────▼────────────┐
+                    │ Visualization & Report │
+                    │ Dashboards, Graphs     │
+                    └────────────────────────┘
+
+
+Project: SafeCreditAI — Loan Default & Credit Card Attrition Analysis
+Objective:
+
+Use Multiple Linear Regression to understand customer behavior patterns and use those insights to build a Logistic Regression model that predicts whether a customer will churn or default (Attrition_Flag).
+
+Phase 1: Data Understanding and Exploration
+Task 1: Load and Summarize the Dataset
+
+Goals:
+
+Load dataset using pandas.
+
+Display first few rows (.head()), data types, and shape.
+
+Check for missing values and duplicates.
+
+Count unique values in each column.
+
+Key Columns:
+CLIENTNUM, Attrition_Flag, Customer_Age, Gender, Dependent_count, Education_Level, Marital_Status, Income_Category, Card_Category, Months_on_book, Total_Relationship_Count, Credit_Limit, Total_Trans_Amt, Total_Trans_Ct, Avg_Utilization_Ratio
+
+Task 2: Descriptive Statistics
+
+Goals:
+
+Use .describe() to find mean, median, min, max, std for numerical columns.
+
+Create visualizations (histograms / boxplots) for distributions.
+
+Identify possible outliers (especially in Credit_Limit, Total_Trans_Amt, Avg_Utilization_Ratio).
+
+Deliverable: Summary report on data quality & descriptive statistics.
+
+Phase 2: Data Preprocessing
+Task 3: Handle Missing and Categorical Data
+
+Goals:
+
+Fill or drop missing values appropriately.
+
+Encode categorical columns using LabelEncoder / OneHotEncoder.
+
+Normalize numerical features if needed (StandardScaler or MinMaxScaler).
+
+Deliverable: Cleaned dataset ready for modeling.
+
+Task 4: Feature Relationships & Correlation
+
+Goals:
+
+Compute pairwise correlations for numerical columns.
+
+Draw a heatmap of correlation matrix.
+
+Identify strongly correlated variables with:
+
+Credit_Limit (continuous target for MLR phase)
+
+Attrition_Flag (categorical target for LR phase)
+
+Deliverable: Correlation matrix and key feature list.
+
+Phase 3: Multiple Linear Regression (Insight Generation)
+Task 5: Define Target and Predictors (for MLR)
+
+Goals:
+
+Use Credit_Limit or Total_Trans_Amt as continuous target variable.
+
+Use demographic + behavioral variables as predictors.
+Example: Customer_Age, Total_Relationship_Count, Months_on_book, Avg_Utilization_Ratio, Total_Ct_Chng_Q4_Q1, Total_Amt_Chng_Q4_Q1.
+
+Task 6: Fit and Evaluate MLR
+
+Goals:
+
+Split dataset into train/test (80/20).
+
+Fit a Multiple Linear Regression model.
+
+Check model assumptions:
+
+Linearity
+
+Normality of residuals
+
+Homoscedasticity
+
+Multicollinearity (using VIF)
+
+Evaluate using R², Adjusted R², MAE, MSE, RMSE.
+
+Deliverable: Insight report summarizing which variables most influence credit/spending behavior.
+
+Task 7: Visualize and Interpret
+
+Goals:
+
+Plot regression line and residual plots.
+
+Create scatter plots showing relationships of key predictors with the continuous target.
+
+Write 2–3 bullet points on what insights the MLR revealed.
+
+Phase 4: Logistic Regression (Prediction Modeling)
+Task 8: Use MLR Insights for Feature Selection
+
+Goals:
+
+Choose top variables from MLR (strong coefficients or correlations).
+
+Use these variables as input features for Logistic Regression.
+Example: Total_Trans_Amt, Total_Ct_Chng_Q4_Q1, Avg_Utilization_Ratio, Months_on_book.
+
+Deliverable: Refined feature set for classification model.
+
+Task 9: Build Logistic Regression Model
+
+Goals:
+
+Define target = Attrition_Flag (convert to binary 0/1).
+
+Split data into train/test (80/20).
+
+Fit logistic regression model.
+
+Evaluate using:
+
+Accuracy
+
+Precision, Recall, F1-score
+
+Confusion Matrix
+
+ROC Curve, AUC score
+
+Deliverable: Performance report + confusion matrix visualization.
+
+Task 10: Interpret Logistic Regression
+
+Goals:
+
+Analyze logistic coefficients and convert them to odds ratios.
+
+Identify which factors most increase the probability of attrition.
+
+Create a ranking of key predictors with their positive/negative impact.
+
+Deliverable: Table of predictors vs odds ratio (business-friendly interpretation).
+
+Phase 5: Combined Insight Reporting
+Task 11: Compare MLR vs LR Findings
+
+Goals:
+
+Discuss how continuous relationships (from MLR) support categorical predictions (from LR).
+
+Highlight any overlaps — e.g., a variable with high influence in MLR also being a key predictor in LR.
+
+Deliverable: Summary section “How MLR Insights Improved Logistic Regression.”
+
+Task 12: Final Business Insights & Recommendations
+
+Goals:
+
+Identify customer types most likely to churn or default.
+
+Suggest policy changes (e.g., engagement strategies for high-risk groups).
+
+Visualize results (bar charts, correlation heatmaps, ROC curves).
+
+Deliverable: Final project report or presentation.
